@@ -1,3 +1,10 @@
+ <?php
+$arr=array();
+$email=$_POST['email'];
+
+include 'main_db.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,12 +21,12 @@
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
 <style type="text/css" >
-	.form-signin{
-		width: 300px;
-		margin-left: 350px;
-		margin-top: 100px;
-	}
+	
+table tr{
+height: 60px;
 
+
+}
 </style>
   </head>
 
@@ -43,8 +50,10 @@
 			
 			<ul class="nav navbar-nav navbar-right">
 			 <li><a href="events.php">Event list</a></li>
-				<li><a href="login.html">Admin</a></li>
+				<li><a href="login.html">Login</a></li>
+				<li> <a href="tag.php">Tag</a></li>
 				 <li><a href="notify.php">Notify</a></li>
+
 
 				
 			   
@@ -53,23 +62,48 @@
 	</div>
 </nav>
 
+
+
+
+
+
+
+
     <div class="container">
-
-      <form class="form-signin" method="post" action="login.php">
-        <h2 class="form-signin-heading">Login</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus><br>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Password" required>
-        
-     <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-      </form>
-
-    </div> <!-- /container -->
+    
+<div  class="table-responsive">
+<table id="displaygetmovie" class='table table-hover'>
+<tr><th>S no</th><th>Events</th><th></th><th>Date</th><th>organisedby</th><th>place</th><th>Tag</th><th>Contact</th><th>Price</th></tr>
+<form>
+<?php
 
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
-  </body>
+$id=1;
+$sql = "SELECT sub,cmd from user where email='$email'";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+       
+ echo "<tr><td>" . $id. "</td><td>" . $row["eventname"]. "</td><td>" . $row["event_time"]. " </td><td>" . $row["event_date"]. "</td><td>".$row["organisedby"]."</td><td>".$row["place"]."</td><td>".$row["tag"]."</td><td>".$row["contact"]."</td><td>".$row["price"] ;
+
+
+
+
+$id++;
+
+    }
+} else {
+    echo "results";
+}
+
+?>
+</table>
+</div>
+</div>
+
+</body>
 </html>
+
+
