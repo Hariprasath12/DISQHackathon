@@ -50,6 +50,7 @@ $name=$login_session;
 			<ul class="nav navbar-nav navbar-right">
 			 <li><a href="events.php">Event list</a></li>
 				<li><a href="adminhome.php"><?php echo"$name";?></a></li>
+				<li><a href="logout.php">Logout</a></li>
 
 				
 			   
